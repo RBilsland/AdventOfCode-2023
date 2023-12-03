@@ -6,7 +6,7 @@ class Program
 {
     public static void Main()
     {
-        Console.WriteLine("Day 02a");
+        Console.WriteLine("Day 02b");
 
         int runningTotal = 0;
 
