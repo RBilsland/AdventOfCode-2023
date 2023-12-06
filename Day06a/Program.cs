@@ -1,6 +1,4 @@
-﻿using static System.Linq.Enumerable;
-
-namespace AdventOfCode2023;
+﻿namespace AdventOfCode2023;
 
 class Program
 {
