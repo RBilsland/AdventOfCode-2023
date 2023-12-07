@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode2023;
+﻿using System.Reflection.PortableExecutable;
+
+namespace AdventOfCode2023;
 
 class Program
 {
@@ -6,17 +8,28 @@ class Program
     {
         Console.WriteLine("Day 07a");
 
-        string cardOrder = "AKQJT98765432";
+        string cardOrder = "AKQT98765432J";
 
         string[] input = File.ReadAllLines("input.txt");
 
         List<(int bid, int score, int card1Value, int card2Value, int card3Value, int card4Value, int card5Value)> readyForSorting = [];
 
-        foreach(string row in input)
+        foreach (string row in input)
         {
             string[] parts = row.Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
-            var results = parts[0]
+            var mostPopular = parts[0]
+                .GroupBy(r => r)
+                .Select(r => (character: r.Key, occurances: r.Count()))
+                .Where(r => r.character != 'J')
+                .OrderByDescending(r => r.occurances)
+                .Select(r => r.character)
+                .DefaultIfEmpty('A')
+                .First();
+
+            string noJokers = parts[0].Replace('J', mostPopular);
+
+            var results = noJokers
                 .GroupBy(r => r)
                 .Select(r => (character: r.Key, occurances: r.Count()))
                 .OrderByDescending(r => r.occurances)
@@ -27,7 +40,7 @@ class Program
             if (results[0].occurances == 5)
             {
                 score = 7;
-            } 
+            }
             else if (results[0].occurances == 4)
             {
                 score = 6;
@@ -37,7 +50,7 @@ class Program
                 if (results[1].occurances == 2)
                 {
                     score = 5;
-                } 
+                }
                 else
                 {
                     score = 4;
@@ -54,7 +67,7 @@ class Program
                     score = 2;
                 }
             }
-            else if (results[0].occurances == 1) 
+            else if (results[0].occurances == 1)
             {
                 score = 1;
             }
@@ -77,7 +90,7 @@ class Program
 
         int runningTotal = 0;
 
-        for(int i = 0; i < sorted.Count; i++)
+        for (int i = 0; i < sorted.Count; i++)
         {
             runningTotal += sorted[i].bid * (i + 1);
         }
