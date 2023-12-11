@@ -6,7 +6,7 @@ class Program
 {
     public static void Main()
     {
-        Console.WriteLine("Day 07a");
+        Console.WriteLine("Day 07b");
 
         string cardOrder = "AKQT98765432J";
 

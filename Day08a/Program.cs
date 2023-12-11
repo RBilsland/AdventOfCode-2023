@@ -4,7 +4,7 @@ class Program
 {
     public static void Main()
     {
-        Console.WriteLine("Day 07a");
+        Console.WriteLine("Day 08a");
 
         string[] input = File.ReadAllLines("input.txt");
 
